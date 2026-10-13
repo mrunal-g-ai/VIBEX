@@ -86,7 +86,7 @@ VIBEX provides tailored pedagogical systems, custom visualizers, and physics-inf
 ### 🎹 1. Keyboard (Piano)
 
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1520523839898-507127cd53ec?auto=format&fit=crop&w=1000&q=80" alt="Keyboard and Piano" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
+  <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1200&q=80" alt="Keyboard and Piano Practice" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
 </p>
 
 *Master keyboard geography, natural hand arch, finger independence, and two-hand rhythmic synchrony.*
@@ -140,7 +140,7 @@ VIBEX provides tailored pedagogical systems, custom visualizers, and physics-inf
 ### 🪈 4. Bansuri (Indian Classical Bamboo Flute)
 
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1000&q=80" alt="Bansuri Indian Classical Flute" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Bansuri_bamboo_flute_23inch.jpg/1200px-Bansuri_bamboo_flute_23inch.jpg" alt="Traditional Indian Bamboo Bansuri Flute" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
 </p>
 
 *Master Indian classical swaras, airtight finger pad sealing, and centered breath embouchure.*
