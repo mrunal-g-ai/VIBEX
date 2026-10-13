@@ -12,7 +12,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Google Gemini API](https://img.shields.io/badge/Google_Gemini-3.7_Flash-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-Express_Backend-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](LICENSE)
 
 [Features](#-key-features) • [Instruments](#-supported-instruments) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Environment Variables](#-environment-variables) • [Project Structure](#-project-structure)
 
@@ -231,7 +231,7 @@ Contributions are welcome! To contribute:
 
 ## 📄 License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.
 
 <div align="center">
 Made with ❤️ for musicians and learners everywhere.
