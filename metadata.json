@@ -1,0 +1,11 @@
+{
+  "name": "VIBEX – Smart AI Music Learning Platform",
+  "description": "AI-powered music mentor teaching Keyboard, Guitar, Violin, and Bansuri through structured curriculum, animated demonstrations, real-time audio pitch/timing analysis, computer vision posture correction, and interactive song practice.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
