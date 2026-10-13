@@ -13,8 +13,9 @@
 [![Google Gemini API](https://img.shields.io/badge/Google_Gemini-3.7_Flash-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-Express_Backend-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](LICENSE)
+[![CI](https://github.com/mrunal-g-ai/VIBEX/actions/workflows/ci.yml/badge.svg)](https://github.com/mrunal-g-ai/VIBEX/actions/workflows/ci.yml)
 
-[Features](#-key-features) • [Instruments](#-supported-instruments) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Environment Variables](#-environment-variables) • [Project Structure](#-project-structure)
+[Features](#-key-features) • [Instruments](#-supported-instruments) • [Architecture](#-system-architecture) • [Learning Modes](#-learning-modes--workflow) • [Tech Stack](#-tech-stack) • [API](#-rest-api-endpoints) • [Getting Started](#-getting-started)
 
 </div>
 
@@ -69,14 +70,132 @@ Whether you're tuning your first acoustic guitar string, finding intonation on a
 
 ---
 
-## 🎸 Supported Instruments
+## 🎼 Supported Instruments
 
-| Instrument | Visualizer | Core Feedback Mechanics |
+VIBEX provides tailored pedagogical systems, custom visualizers, and physics-informed feedback for four distinct instruments:
+
+| Instrument | Visualizer | Core Feedback Mechanics | Primary Notation System |
+| :--- | :--- | :--- | :--- |
+| **🎹 Keyboard (Piano)** | Interactive 88-Key Piano | Hand arch, 1–5 finger numbering, two-hand coordination | Standard Western notation & key map |
+| **🎸 Guitar** | 6-String Dynamic Fretboard | Fretting finger arch, thumb behind neck, fret accuracy | Tablature, fret/string numbers & chord boxes |
+| **🎻 Violin** | Fretless Fingerboard HUD | Microtonal pitch cents, straight bow angle, relaxed left wrist | Western notation & microtonal cents tuner |
+| **🪈 Bansuri** | 6-Hole Bamboo Flute Simulator | Pad hole sealing, embouchure blowing angle, breath support | Indian Classical Swaras (*Sa Re Ga Ma*) & Western pitch |
+
+---
+
+### 🎹 1. Keyboard (Piano)
+
+<p align="center">
+  <img src="https://images.unsplash.com/photo-1520523839898-507127cd53ec?auto=format&fit=crop&w=1000&q=80" alt="Keyboard and Piano" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
+</p>
+
+*Master keyboard geography, natural hand arch, finger independence, and two-hand rhythmic synchrony.*
+
+- **Interactive Visualizer**: Dynamic multi-octave piano interface highlighting active notes, root keys, scale patterns, and anatomical finger numbers (Thumb: 1, Index: 2, Middle: 3, Ring: 4, Pinky: 5).
+- **Audio Feedback**: Instant acoustic pitch recognition matching key strikes, polyphonic chord detection, and note duration validation.
+- **Computer Vision Posture HUD**: 
+  - Detects **flat finger collapse** (warning when fingers lose their relaxed curved arch).
+  - Monitors **wrist sagging** below key-bed level to prevent strain and tendonitis.
+  - Checks **elbow-to-keyboard height** for ergonomic seated balance.
+- **Curriculum Highlights**: Seating & Middle C orientation, C Major pentachord (C-D-E-F-G), thumb tuck arpeggios, two-hand counterpoint, and classical/pop chord progressions.
+
+---
+
+### 🎸 2. Acoustic & Electric Guitar
+
+<p align="center">
+  <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=1000&q=80" alt="Guitar Fretboard" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
+</p>
+
+*Develop clean fretting mechanics, fluid string transitions, and rhythmic strumming precision.*
+
+- **Interactive Visualizer**: 6-string virtual fretboard with standard and alternate tunings (E-A-D-G-B-E), custom fret markers (3, 5, 7, 9, 12), active scale boxes, and finger markers (1=Index, 2=Middle, 3=Ring, 4=Pinky).
+- **Audio Feedback**: Pitch detection for single-note clarity, fret buzz isolation, and string separation scoring for open & barre chords.
+- **Computer Vision Posture HUD**:
+  - Detects **fretting thumb positioning** (warns if thumb hooks too far over the neck instead of supporting behind the 2nd fret).
+  - Analyzes **finger arch angle** to prevent accidental string muting.
+  - Monitors **instrument body angle** and neck tilt relative to the player's torso.
+- **Curriculum Highlights**: Standard tuning fundamentals, open chords (Em, C, G, D, Am), alternate pick stroke drills, the spider finger-independence exercise, and pentatonic blues soloing.
+
+---
+
+### 🎻 3. Violin
+
+<p align="center">
+  <img src="https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=1000&q=80" alt="Violin and Bow" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
+</p>
+
+*Conquer the fretless fingerboard with microtonal intonation precision and fluid bow mechanics.*
+
+- **Interactive Visualizer**: Precision fretless fingerboard featuring standard 1st position tape guides, string indicators (G3, D4, A4, E5), and real-time cents intonation deviation meters.
+- **Audio Feedback**: Microtonal intonation tracking within ±5 cents, overtone harmonic resonance detection, and continuous sustained note stability.
+- **Computer Vision Posture HUD**:
+  - Detects **"Pizza Wrist" (collapsed left wrist)** pressing against the neck.
+  - Checks **bow stroke trajectory** (alerts if the bow drifts crookedly rather than staying perpendicular to the strings in the sounding lane).
+  - Monitors **scroll elevation** (alerts if the violin scroll droops below horizontal level).
+- **Curriculum Highlights**: Collarbone rest balance, the "bunny rabbit" bow grip, open string bow distribution (frog to tip), 1st position finger placements, slurred bow transitions, and expressive vibrato preparation.
+
+---
+
+### 🪈 4. Bansuri (Indian Classical Bamboo Flute)
+
+<p align="center">
+  <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1000&q=80" alt="Bansuri Indian Classical Flute" width="100%" style="border-radius: 8px; max-height: 380px; object-fit: cover;" />
+</p>
+
+*Master Indian classical swaras, airtight finger pad sealing, and centered breath embouchure.*
+
+- **Interactive Visualizer**: Realistic 6-hole north Indian bamboo flute simulator displaying open, closed, and half-shaded holes mapped to both Indian classical Swaras (*Sa, Re, Ga, Ma, Pa, Dha, Ni*) and Western pitch frequencies.
+- **Audio Feedback**: Sustained tone purity analysis, breath stability evaluation, microtonal inflection scoring, and Komal (flat) / Teevra (sharp) half-hole pitch verification.
+- **Computer Vision Posture HUD**:
+  - Monitors **lip embouchure alignment** and angle against the blowing hole.
+  - Verifies **flat finger pad coverage** (ensures players use finger pads rather than curved fingertips to seal large bamboo tone holes).
+  - Checks **flute tilt angle** and relaxed shoulder posture.
+- **Curriculum Highlights**: Sound generation and lip aperture, Mandra/Madhya/Taar Saptak octaves, fundamental *Saptak Swaras*, Alankars (palta speed drills), and traditional Raga ornamental techniques (*Meend* glide and *Murki*).
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    subgraph Client ["Client Browser (React 19 + TypeScript)"]
+        MIC["Audio Input (Microphone)"] --> AE["Audio Engine (Autocorrelation & Pitch Extractor)"]
+        CAM["Video Input (WebRTC Camera)"] --> VE["Vision Engine (Canvas Pose & Posture Analyzer)"]
+        AE --> HUD["Real-Time Feedback HUD & Tuner"]
+        VE --> HUD
+        HUD --> VIZ["Interactive Visualizers (Piano, Fretboard, Violin, Bansuri)"]
+        APP["VIBEX Application Core"] --> HUD
+    end
+
+    subgraph Backend ["Express Server (Node.js)"]
+        SERVER["server.ts REST API"]
+        PROMPT["Pedagogical Prompt Pipeline"]
+        SERVER --> PROMPT
+    end
+
+    subgraph AI ["Google Gemini AI"]
+        GEMINI["Gemini 3.7 Flash Model"]
+    end
+
+    Client -- "Telemetry (Accuracy %, Cents, Mistakes)" --> SERVER
+    PROMPT --> GEMINI
+    GEMINI -- "Diagnostic Feedback & Custom Drills" --> Client
+```
+
+---
+
+## 🎮 Learning Modes & Workflow
+
+VIBEX organizes music education into five interconnected modules:
+
+| Mode | Purpose | Key Capabilities |
 | :--- | :--- | :--- |
-| **🎹 Keyboard (Piano)** | Interactive Piano | Two-hand coordination, 1-5 finger numbering, keystroke audio |
-| **🎸 Guitar** | Dynamic Fretboard | Fret & string accuracy, finger arch, wrist position |
-| **🎻 Violin** | Fretless Fingerboard | Microtonal pitch intonation, bow angle, wrist alignment |
-| **🪈 Bansuri** | 6-Hole Flute Simulator | Hole coverage seal, breath embouchure, Indian Swara (*Sa Re Ga Ma*) |
+| 🚀 **Onboarding & Assessment** | Experience profiling | Sets instrument, skill baseline (Beginner/Intermediate), and daily practice target |
+| 📖 **Structured Curriculum** | Step-by-step masterclasses | 12 progressive phases per instrument with theory, animated demos, and required pass scores |
+| 🎯 **Practice & Tuner HUD** | Live drill rehearsal | Microtonal pitch detection, metronome tempo sync, and camera posture alerts |
+| 🏆 **Song Arena** | Repertoire play-along | Interactive rolling sheet music, real-time note accuracy %, streaks, and confetti scores |
+| 🤖 **AI Maestro Chat** | 24/7 Personal Tutor | In-depth theory Q&A, fingering tips, and automated adaptive drill generation |
 
 ---
 
@@ -155,8 +274,8 @@ VIBEX/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/vibex.git
-   cd vibex
+   git clone https://github.com/mrunal-g-ai/VIBEX.git
+   cd VIBEX
    ```
 
 2. **Install dependencies**:
@@ -205,6 +324,19 @@ VIBEX/
 | `APP_URL` | Optional | Hosted application URL for cloud deployments |
 
 *\*If no API key is provided, VIBEX gracefully falls back to built-in pedagogical heuristics so you can still practice.*
+
+---
+
+## 🔌 REST API Endpoints
+
+The backend Express server (`server.ts`) exposes specialized music pedagogy endpoints:
+
+| Method | Endpoint | Description | Request Body Payload |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/health` | Backend health & uptime check | None |
+| `POST` | `/api/ai/mentor-advice` | Analyzes telemetry to deliver personalized coaching | `{ instrument, experienceLevel, audioAccuracy, rhythmAccuracy, visionMistakes, recentNotes }` |
+| `POST` | `/api/ai/chat` | Interactive conversation with the AI Music Mentor | `{ message, instrument, userContext }` |
+| `POST` | `/api/ai/generate-exercise` | Dynamically creates custom drills targeting weak skills | `{ instrument, weakSkill, level }` |
 
 ---
 
