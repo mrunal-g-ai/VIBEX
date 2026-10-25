@@ -16,6 +16,7 @@ import { RealtimeAudioVisionMonitor } from './RealtimeAudioVisionMonitor';
 import { SmartCorrectionModal } from './SmartCorrectionModal';
 import { AIAvatarCoach } from './AIAvatarCoach';
 import { CURRICULUM_DATA } from '../data/curriculum';
+import { getApiUrl } from '../services/api';
 import confetti from 'canvas-confetti';
 import {
   Play,
@@ -209,7 +210,7 @@ export const PracticeExerciseView: React.FC<Props> = ({
     // Request AI feedback from Gemini backend
     setIsLoadingAI(true);
     try {
-      const response = await fetch('/api/ai/evaluate-practice', {
+      const response = await fetch(getApiUrl('/api/ai/evaluate-practice'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

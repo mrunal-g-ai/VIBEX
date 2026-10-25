@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { InstrumentType, Exercise } from '../types';
+import { getApiUrl } from '../services/api';
 import {
   Sparkles,
   Send,
@@ -90,7 +91,7 @@ export const AITeacherChat: React.FC<Props> = ({
     setIsLoading(true);
 
     try {
-      const res = await fetch('/api/ai/mentor-chat', {
+      const res = await fetch(getApiUrl('/api/ai/mentor-chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -135,7 +136,7 @@ export const AITeacherChat: React.FC<Props> = ({
 
     setIsGeneratingDrill(true);
     try {
-      const res = await fetch('/api/ai/generate-exercise', {
+      const res = await fetch(getApiUrl('/api/ai/generate-exercise'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

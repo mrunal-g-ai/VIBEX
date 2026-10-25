@@ -31,3 +31,12 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Flutter & Dart
+.dart_tool/
+.flutter-plugins*
+.pub-cache/
+.pub/
+
+# Rust & Tauri
+target/

@@ -282,7 +282,7 @@ export const App: React.FC = () => {
 
             {/* Instrument Selection Pill Bar */}
             <nav
-              className={`flex items-center gap-1 rounded-full p-1 border shadow-inner ${
+              className={`flex items-center gap-1 rounded-full p-1 border shadow-inner max-w-full overflow-x-auto ${
                 theme === 'zen'
                   ? 'bg-stone-200/70 border-stone-300'
                   : theme === 'arcade'
