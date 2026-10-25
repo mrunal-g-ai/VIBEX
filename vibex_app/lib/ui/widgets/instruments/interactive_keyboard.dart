@@ -60,7 +60,7 @@ class InteractiveKeyboard extends StatelessWidget {
                 children: _whiteKeys.map((note) {
                   final isTarget = targetNotes.contains(note);
                   final isActive = activeNote == note;
-                  final swara = kSwaraMap[note.substring(0, 1)] ?? '';
+                  final swara = (kSwaraMap[note.substring(0, 1)] ?? '').split(' ').first;
 
                   return GestureDetector(
                     onTapDown: (_) => _handleKeyTap(note),
@@ -94,26 +94,30 @@ class InteractiveKeyboard extends StatelessWidget {
                           if (showSwaras && swara.isNotEmpty)
                             Text(
                               swara,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 9.5,
                                 fontWeight: FontWeight.w700,
                                 color: (isActive || isTarget)
                                     ? Colors.black
                                     : const Color(0xFF64748B),
                               ),
                             ),
-                          const SizedBox(height: 2),
+                          const SizedBox(height: 1),
                           Text(
                             note,
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
                             style: TextStyle(
-                              fontSize: 11,
+                              fontSize: 10,
                               fontWeight: FontWeight.w800,
                               color: (isActive || isTarget)
                                   ? Colors.black
                                   : const Color(0xFF334155),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 4),
                         ],
                       ),
                     ),

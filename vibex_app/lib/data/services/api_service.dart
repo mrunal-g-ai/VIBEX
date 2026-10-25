@@ -179,6 +179,19 @@ class ApiService {
       throw Exception('AI generation failed: $serverMsg');
     }
   }
+
+  /// Alias for generateExercise for UI callers
+  Future<Map<String, dynamic>> generateDrill({
+    required String instrument,
+    required String skillArea,
+    String level = 'Beginner',
+  }) async {
+    return generateExercise(
+      instrument: instrument,
+      weakSkill: skillArea,
+      level: level,
+    );
+  }
 }
 
 // ─── Provider ────────────────────────────────────────────────────────────────

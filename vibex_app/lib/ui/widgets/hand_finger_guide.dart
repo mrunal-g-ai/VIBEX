@@ -32,16 +32,19 @@ class HandFingerGuide extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                label.toUpperCase(),
-                style: const TextStyle(
-                  color: Color(0xFF94A3B8),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.6,
+              Expanded(
+                child: Text(
+                  label.toUpperCase(),
+                  style: const TextStyle(
+                    color: Color(0xFF94A3B8),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.6,
+                  ),
                 ),
               ),
-              if (activeFinger != null)
+              if (activeFinger != null) ...[
+                const SizedBox(width: 8),
                 Text(
                   'Use Finger $activeFinger',
                   style: const TextStyle(
@@ -50,6 +53,7 @@ class HandFingerGuide extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              ],
             ],
           ),
           const SizedBox(height: 8),

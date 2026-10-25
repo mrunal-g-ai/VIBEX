@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/theme/app_theme.dart';
 import '../../data/models/songs_data.dart';
 import '../../data/providers/app_providers.dart';
 import '../../services/audio_engine.dart';
@@ -109,6 +110,8 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = ref.watch(themeProvider);
+    final colors = currentTheme.colors;
     final section = _getCurrentSection();
 
     return ListView(
@@ -119,17 +122,17 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
           children: [
             if (widget.onBackToLibrary != null)
               IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                icon: Icon(Icons.arrow_back, color: colors.textPrimary),
                 onPressed: widget.onBackToLibrary,
               ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'PERFORMANCE ARENA',
                     style: TextStyle(
-                      color: Color(0xFFE5C07B),
+                      color: colors.accentPrimary,
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1.2,
@@ -137,8 +140,8 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
                   ),
                   Text(
                     widget.song.title,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: colors.textPrimary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -174,10 +177,12 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
                 child: ChoiceChip(
                   label: Text(sec.name),
                   selected: isSelected,
-                  selectedColor: const Color(0xFFE5C07B),
-                  backgroundColor: const Color(0xFF161B26),
+                  selectedColor: colors.accentPrimary,
+                  backgroundColor: colors.bgCardElevated,
                   labelStyle: TextStyle(
-                    color: isSelected ? Colors.black : const Color(0xFF94A3B8),
+                    color: isSelected
+                        ? (currentTheme == VibexTheme.zen ? Colors.white : Colors.black)
+                        : colors.textMuted,
                     fontWeight: FontWeight.bold,
                   ),
                   onSelected: (val) {
@@ -198,9 +203,9 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
           height: 140,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: const Color(0xFF090C14),
+            color: colors.bgMain,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF1E293B)),
+            border: Border.all(color: colors.borderSubtle),
           ),
           child: Stack(
             children: [
@@ -212,10 +217,10 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
                 child: Container(
                   width: 3,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE5C07B),
+                    color: colors.accentPrimary,
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFFE5C07B).withAlpha(150),
+                        color: colors.accentPrimary.withAlpha(150),
                         blurRadius: 8,
                         spreadRadius: 2,
                       ),
@@ -292,9 +297,9 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFF11141D),
+            color: colors.bgCard,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF1E293B)),
+            border: Border.all(color: colors.borderSubtle),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,16 +309,16 @@ class _SongArenaScreenState extends ConsumerState<SongArenaScreen> {
                 children: [
                   Text(
                     'PLAY ALONG: ${widget.song.instrument.displayName.toUpperCase()}',
-                    style: const TextStyle(
-                      color: Color(0xFF94A3B8),
+                    style: TextStyle(
+                      color: colors.textMuted,
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.8,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'Tap to trigger note hit',
-                    style: TextStyle(color: Color(0xFFE5C07B), fontSize: 11),
+                    style: TextStyle(color: colors.accentPrimary, fontSize: 11),
                   ),
                 ],
               ),

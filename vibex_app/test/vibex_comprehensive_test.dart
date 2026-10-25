@@ -57,9 +57,9 @@ void main() {
         findsOneWidget,
       );
 
-      final badgeNotice = find.text('No badges unlocked yet. Complete exercises and lessons to earn achievements.');
-      await tester.scrollUntilVisible(badgeNotice, 200);
-      expect(badgeNotice, findsOneWidget);
+      await tester.drag(find.byType(ListView), const Offset(0, -600));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Unlocked'), findsOneWidget);
     });
 
     testWidgets('PitchGauge displays "Listening..." when no audio is detected (never fakes pitch)',

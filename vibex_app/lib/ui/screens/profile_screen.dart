@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/providers/app_providers.dart';
 
@@ -14,33 +15,39 @@ class ProfileScreen extends ConsumerWidget {
   static const List<Map<String, dynamic>> _allBadges = [
     {
       'id': 'first_note',
-      'title': 'First Note',
-      'desc': 'Played your first pitch accurately',
+      'title': 'First Resonant Note',
+      'desc': 'Completed your first pitch-perfect exercise',
       'icon': '🎵',
     },
     {
+      'id': 'posture_pro',
+      'title': 'Flawless Form',
+      'desc': 'Maintained 95%+ posture score on vision camera',
+      'icon': '🧘',
+    },
+    {
       'id': 'streak_3',
-      'title': 'Dedicated Student',
-      'desc': 'Maintained a 3-day practice streak',
+      'title': 'Consistent Maestro',
+      'desc': 'Maintained a 3-day continuous practice habit',
       'icon': '🔥',
     },
     {
-      'id': 'posture_pro',
-      'title': 'Posture Pro',
-      'desc': 'Optimal camera wrist alignment score',
-      'icon': '📷',
+      'id': 'raag_scholar',
+      'title': 'Raga Pioneer',
+      'desc': 'Mastered Sa-Re-Ga-Ma & Raag Bhupali on Bansuri',
+      'icon': '🪈',
     },
     {
-      'id': 'scale_master',
-      'title': 'Scale Master',
-      'desc': 'Complete major scale drill without misses',
-      'icon': '⚡',
+      'id': 'finger_freedom',
+      'title': 'Finger Independence',
+      'desc': 'Mastered 5-finger piano pattern with zero hesitation',
+      'icon': '🎹',
     },
     {
-      'id': 'multi_instrument',
-      'title': 'Maestro Polymath',
-      'desc': 'Practice 2 or more instruments in VIBEX',
-      'icon': '👑',
+      'id': 'clean_tone',
+      'title': 'Pure Intonation',
+      'desc': 'Maintained intonation within ±5 cents across 10 notes',
+      'icon': '🎻',
     },
   ];
 
@@ -48,22 +55,23 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final progress = ref.watch(userProgressProvider);
     final theme = ref.watch(themeProvider);
+    final colors = theme.colors;
     final currentInstrument = ref.watch(instrumentProvider);
 
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       children: [
-        // Profile Avatar & Headline
+        // Profile Avatar & Headline matching React UserProfileStats.tsx
         Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(22),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFF1E2433), Color(0xFF131722)],
+            gradient: LinearGradient(
+              colors: [colors.bgCard, colors.bgCardElevated, colors.bgMain],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0xFF334155)),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: colors.borderSubtle),
           ),
           child: Row(
             children: [
@@ -72,18 +80,27 @@ class ProfileScreen extends ConsumerWidget {
                 height: 64,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFE5C07B), Color(0xFFB8914B)],
+                  gradient: LinearGradient(
+                    colors: [colors.accentPrimary, colors.accentSecondary],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFFE5C07B).withAlpha(100),
-                      blurRadius: 10,
+                      color: colors.accentPrimary.withAlpha(90),
+                      blurRadius: 12,
                     ),
                   ],
                 ),
-                child: const Center(
-                  child: Text('🎓', style: TextStyle(fontSize: 32)),
+                child: Center(
+                  child: Text(
+                    'VX',
+                    style: TextStyle(
+                      color: theme == VibexTheme.zen ? Colors.white : Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
@@ -91,27 +108,51 @@ class ProfileScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'VIBEX Scholar',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: [
+                        Text(
+                          'Musician Profile',
+                          style: GoogleFonts.instrumentSerif(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 24,
+                            color: colors.textPrimary,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: colors.accentPrimary.withAlpha(30),
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(color: colors.accentPrimary.withAlpha(80)),
+                          ),
+                          child: Text(
+                            progress.xp > 2000 ? 'LEVEL 3 VIRTUOSO' : (progress.xp > 500 ? 'LEVEL 2 APPRENTICE' : 'LEVEL 1 NOVICE'),
+                            style: TextStyle(
+                              color: colors.accentPrimary,
+                              fontSize: 9.5,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Focus Instrument: ${currentInstrument.displayName}',
-                      style: const TextStyle(
-                        color: Color(0xFFE5C07B),
+                      style: TextStyle(
+                        color: colors.accentPrimary,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
                     Text(
-                      '${progress.completedLessons.length} Lessons Finished • ${progress.completedExercises.length} Drills Mastered',
-                      style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
+                      'Practicing actively across 4 instruments with AI computer vision & audio pitch analysis.',
+                      style: TextStyle(color: colors.textMuted, fontSize: 11.5, height: 1.3),
                     ),
                   ],
                 ),
@@ -121,36 +162,73 @@ class ProfileScreen extends ConsumerWidget {
         ),
         const SizedBox(height: 18),
 
-        // Key Metrics Row
-        Row(
-          children: [
-            Expanded(
-              child: _buildMetricTile(
-                '🔥 Streak',
-                '${progress.streakDays} Days',
-                progress.streakDays == 0 ? 'Start your streak today' : 'Keep practicing daily!',
-                const Color(0xFFF59E0B),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _buildMetricTile(
-                '⏱ Practice',
-                '${progress.totalPracticeMinutes} Mins',
-                'Deliberate practice time',
-                const Color(0xFF38BDF8),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _buildMetricTile(
-                '⭐ Total XP',
-                '${progress.xp}',
-                progress.xp == 0 ? 'Rank: Beginner' : (progress.xp > 2000 ? 'Rank: Virtuoso' : 'Rank: Apprentice'),
-                const Color(0xFF10B981),
-              ),
-            ),
-          ],
+        // Key Metrics: Streak, Practice, XP
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final isNarrow = constraints.maxWidth < 360;
+            if (isNarrow) {
+              return Column(
+                children: [
+                  _buildMetricTile(
+                    '🔥 Streak',
+                    '${progress.streakDays} Days',
+                    progress.streakDays == 0 ? 'Start your streak today' : 'Keep practicing daily!',
+                    const Color(0xFFF59E0B),
+                    colors,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildMetricTile(
+                    '⏱ Practice',
+                    '${progress.totalPracticeMinutes} Mins',
+                    'Deliberate practice time',
+                    const Color(0xFF38BDF8),
+                    colors,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildMetricTile(
+                    '⭐ Total XP',
+                    '${progress.xp}',
+                    progress.xp == 0 ? 'Rank: Beginner' : (progress.xp > 2000 ? 'Rank: Virtuoso' : 'Rank: Apprentice'),
+                    const Color(0xFF10B981),
+                    colors,
+                  ),
+                ],
+              );
+            }
+            return Row(
+              children: [
+                Expanded(
+                  child: _buildMetricTile(
+                    '🔥 Streak',
+                    '${progress.streakDays} Days',
+                    progress.streakDays == 0 ? 'Start your streak today' : 'Keep practicing daily!',
+                    const Color(0xFFF59E0B),
+                    colors,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _buildMetricTile(
+                    '⏱ Practice',
+                    '${progress.totalPracticeMinutes} Mins',
+                    'Deliberate practice time',
+                    const Color(0xFF38BDF8),
+                    colors,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _buildMetricTile(
+                    '⭐ Total XP',
+                    '${progress.xp}',
+                    progress.xp == 0 ? 'Rank: Beginner' : (progress.xp > 2000 ? 'Rank: Virtuoso' : 'Rank: Apprentice'),
+                    const Color(0xFF10B981),
+                    colors,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
         const SizedBox(height: 16),
 
@@ -158,18 +236,18 @@ class ProfileScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF161B26),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFF2E384D)),
+              color: colors.bgCardElevated,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: colors.borderSubtle),
             ),
             child: Row(
-              children: const [
-                Icon(Icons.info_outline, color: Color(0xFFE5C07B), size: 20),
-                SizedBox(width: 12),
+              children: [
+                Icon(Icons.info_outline, color: colors.accentPrimary, size: 20),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'No practice sessions yet. Start your first lesson in the Learn tab to begin building your mastery profile.',
-                    style: TextStyle(color: Color(0xFF94A3B8), fontSize: 13),
+                    style: TextStyle(color: colors.textMuted, fontSize: 13),
                   ),
                 ),
               ],
@@ -180,198 +258,192 @@ class ProfileScreen extends ConsumerWidget {
 
         // Instrument Mastery Section
         Container(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFF11141D),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF1E293B)),
+            color: colors.bgCard,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: colors.borderSubtle),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'INSTRUMENT MASTERY BREAKDOWN',
                 style: TextStyle(
-                  color: Color(0xFFE5C07B),
+                  color: colors.accentPrimary,
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
-                  letterSpacing: 1,
+                  letterSpacing: 1.1,
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
               ...InstrumentType.values.map((inst) {
-                final mastery = progress.instrumentMastery[inst] ?? 10;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(inst.emoji, style: const TextStyle(fontSize: 16)),
-                              const SizedBox(width: 8),
-                              Text(
+                final mastery = progress.instrumentMastery[inst] ?? 0;
+                final isCurrent = inst == currentInstrument;
+
+                return InkWell(
+                  onTap: () {
+                    ref.read(instrumentProvider.notifier).setInstrument(inst);
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: isCurrent ? colors.bgCardElevated : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isCurrent ? colors.accentPrimary.withAlpha(80) : Colors.transparent,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(inst.emoji, style: const TextStyle(fontSize: 16)),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
                                 inst.displayName,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                style: TextStyle(
+                                  color: colors.textPrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13,
                                 ),
                               ),
-                            ],
-                          ),
-                          Text(
-                            '$mastery%',
-                            style: const TextStyle(
-                              color: Color(0xFFE5C07B),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: LinearProgressIndicator(
-                          value: mastery / 100.0,
-                          minHeight: 6,
-                          backgroundColor: const Color(0xFF1E2433),
-                          valueColor: AlwaysStoppedAnimation(
-                            inst == currentInstrument
-                                ? const Color(0xFFE5C07B)
-                                : const Color(0xFF64748B),
+                            const SizedBox(width: 8),
+                            Text(
+                              '$mastery%',
+                              style: TextStyle(
+                                color: colors.accentPrimary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: LinearProgressIndicator(
+                            value: mastery / 100,
+                            minHeight: 6,
+                            backgroundColor: colors.borderSubtle,
+                            valueColor: AlwaysStoppedAnimation<Color>(colors.accentPrimary),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }),
             ],
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 18),
 
-        // Achievements & Badges
+        // Achievement Badges Section
         Container(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFF11141D),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF1E293B)),
+            color: colors.bgCard,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: colors.borderSubtle),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'ACHIEVEMENT TROPHY VAULT',
-                style: TextStyle(
-                  color: Color(0xFFE5C07B),
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1,
-                ),
-              ),
-              const SizedBox(height: 14),
-              if (progress.badges.isEmpty)
-                Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0F1219),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    'No badges unlocked yet. Complete exercises and lessons to earn achievements.',
-                    style: TextStyle(color: Color(0xFF64748B), fontSize: 12),
-                  ),
-                ),
-              ..._allBadges.map((badge) {
-                final isUnlocked = progress.badges.contains(badge['id']);
-
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: isUnlocked ? const Color(0xFF161B26) : const Color(0xFF0F1219),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: isUnlocked ? const Color(0xFF10B981).withAlpha(100) : const Color(0xFF1E2433),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'AUTHENTIC EARNED ACHIEVEMENTS',
+                      style: TextStyle(
+                        color: colors.accentPrimary,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.1,
+                      ),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 38,
-                        height: 38,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: isUnlocked ? const Color(0xFF10B981).withAlpha(30) : const Color(0xFF1E2433),
-                        ),
-                        child: Center(
-                          child: Text(badge['icon'] as String, style: const TextStyle(fontSize: 18)),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              badge['title'] as String,
-                              style: TextStyle(
-                                color: isUnlocked ? Colors.white : const Color(0xFF64748B),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
-                              ),
-                            ),
-                            Text(
-                              badge['desc'] as String,
-                              style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (isUnlocked)
-                        const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 18),
-                    ],
-                  ),
-                );
-              }),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-
-        // Theme and Visual Studio
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: const Color(0xFF11141D),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF1E293B)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Active Theme', style: TextStyle(color: Color(0xFF94A3B8), fontSize: 12)),
-                  const SizedBox(height: 2),
+                  const SizedBox(width: 8),
                   Text(
-                    theme.displayName,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                    '${progress.badges.length}/${_allBadges.length} Unlocked',
+                    style: TextStyle(color: colors.textMuted, fontSize: 11, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              OutlinedButton.icon(
-                onPressed: onOpenThemeModal,
-                icon: const Icon(Icons.palette, size: 16),
-                label: const Text('CHANGE THEME'),
+              const SizedBox(height: 16),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 220,
+                  mainAxisExtent: 110,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                itemCount: _allBadges.length,
+                itemBuilder: (context, index) {
+                  final badge = _allBadges[index];
+                  final isUnlocked = progress.badges.contains(badge['id']);
+
+                  return Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: isUnlocked ? colors.bgCardElevated : Colors.black.withAlpha(40),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: isUnlocked ? colors.accentPrimary.withAlpha(80) : colors.borderSubtle,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              badge['icon'] as String,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: isUnlocked ? null : Colors.grey,
+                              ),
+                            ),
+                            const Spacer(),
+                            if (isUnlocked)
+                              Icon(Icons.check_circle_rounded, color: colors.accentPrimary, size: 14)
+                            else
+                              Icon(Icons.lock_outline_rounded, color: colors.textMuted, size: 14),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          badge['title'] as String,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: isUnlocked ? colors.textPrimary : colors.textMuted,
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          badge['desc'] as String,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: colors.textMuted,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -380,22 +452,43 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildMetricTile(String label, String value, String sub, Color accentColor) {
+  Widget _buildMetricTile(
+    String label,
+    String value,
+    String subtitle,
+    Color color,
+    VibexColorScheme colors,
+  ) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF11141D),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF1E293B)),
+        color: colors.bgCard,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: colors.borderSubtle),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(color: accentColor, fontSize: 11, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 4),
-          Text(value, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            label,
+            style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            value,
+            style: TextStyle(
+              color: colors.textPrimary,
+              fontSize: 18,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
           const SizedBox(height: 2),
-          Text(sub, style: const TextStyle(color: Color(0xFF64748B), fontSize: 9)),
+          Text(
+            subtitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: colors.textMuted, fontSize: 10),
+          ),
         ],
       ),
     );
